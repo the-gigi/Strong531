@@ -49,9 +49,9 @@ namespace Strong531
         }
         
         
-        public static Plan MakePlan(RepMax trueOneRepMax, int cycleCount) 
+        public static Plan MakePlan(RepMax trueOneRepMax, int cycleCount)
         {
-            var plan = new Plan{ TrueOneRepMax = trueOneRepMax };
+            var plan = new Plan(trueOneRepMax, cycleCount);
             var trainingMax = CalculateTrainingMax(trueOneRepMax); 
             for (var i = 0; i < cycleCount; ++i)
             {
@@ -65,7 +65,7 @@ namespace Strong531
         
         public static Cycle MakeCycle(RepMax trainingMax) 
         {
-            var cycle = new Cycle();
+            var cycle = new Cycle(trainingMax);
             foreach (Lift lift in Enum.GetValues(typeof(Lift)))
             {
                 var weight = trainingMax[lift];

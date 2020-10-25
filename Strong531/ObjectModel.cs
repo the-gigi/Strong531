@@ -27,7 +27,13 @@ namespace Strong531
 
     public class WeeklyPlan : Dictionary<Lift, Set[]>
     {
-
+        public WeeklyPlan()
+        {
+            foreach (Lift lift in Enum.GetValues(typeof(Lift)))
+            {
+                this[lift] = new Set[]{};
+            }
+        }
     }
 
     public class RepMax : Dictionary<Lift, decimal>
@@ -38,13 +44,29 @@ namespace Strong531
 
     public struct Cycle
     {
+        public Cycle(RepMax trainingMax)
+        {
+            TrainingMax = trainingMax;
+            Weeks = new Dictionary<Week, WeeklyPlan>();
+
+            foreach (Week week in Enum.GetValues(typeof(Week)))
+            {
+                Weeks[week] = new WeeklyPlan();
+            }
+        }
+
         public RepMax TrainingMax;
         public Dictionary<Week, WeeklyPlan> Weeks;
     }
 
     public struct Plan
     {
-        public RepMax TrueOneRepMax ;
+        public Plan(RepMax trueOneRepMax, int cycleCount)
+        {
+            Cycles = new List<Cycle>(cycleCount);
+            TrueOneRepMax = trueOneRepMax;
+        }
+        public RepMax TrueOneRepMax;
         public List<Cycle> Cycles;
     }
 }

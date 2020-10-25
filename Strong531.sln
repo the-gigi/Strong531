@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strong531", "Strong531\Stro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strong531Test", "Strong531Test\Strong531Test.csproj", "{8235CECE-FE5C-4EDA-A595-4776810C311D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strong531ConsoleApp", "Strong531ConsoleApp\Strong531ConsoleApp.csproj", "{F72ABF3D-985E-4624-8A53-3F032C68B70E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{8235CECE-FE5C-4EDA-A595-4776810C311D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8235CECE-FE5C-4EDA-A595-4776810C311D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8235CECE-FE5C-4EDA-A595-4776810C311D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F72ABF3D-985E-4624-8A53-3F032C68B70E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F72ABF3D-985E-4624-8A53-3F032C68B70E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F72ABF3D-985E-4624-8A53-3F032C68B70E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F72ABF3D-985E-4624-8A53-3F032C68B70E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
