@@ -2,13 +2,32 @@
 
 This project generates training programs based on [Jim Wendler](https://jimwendler.com)'s excellent [5-3-1 method](https://jimwendler.com/blogs/jimwendler-com/101065094-5-3-1-for-a-beginner).
 
-## Google Sheets API
+It reads a configuration file located in `~/.Strong531/config.yaml` that contains the 1RM of each user.
+The number of cycles in the plan can be passed as a command-line argument (2 by default)
 
-This program manages the plans in Google sheets.
+It generates a plan for each user and prints it to the console in YAML format.
 
-Check out https://developers.google.com/sheets/api/quickstart/dotnet
+Here is what the config file looks like:
 
-# Reference
-
-https://www.hardworkingnerd.com/how-to-read-and-write-to-google-sheets-with-c/
+```
+Guy:
+   Press: 110
+   Deadlift: 200
+   Bench: 155
+   Squat: 165
+Liat:
+    Press: 100
+    Deadlift: 225
+    Bench: 135
+    Squat: 165
+Gigi:
+    Press: 115
+    Deadlift: 275
+    Bench: 195
+Saar:
+    Press: 145
+    Deadlift: 275
+    Bench: 225
+    Squat: 165
+```    
 
