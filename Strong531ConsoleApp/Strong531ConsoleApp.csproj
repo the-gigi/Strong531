@@ -9,4 +9,15 @@
       <ProjectReference Include="..\Strong531\Strong531.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Google.Apis.Sheets.v4" Version="1.49.0.2111" />
+      <PackageReference Include="System.CommandLine.Parser" Version="0.1.1" />
+      <PackageReference Include="YamlDotNet" Version="8.1.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="strong531-abc28b8689fd.json" />
+      <Content Include="google-sheets-credentials.json" />
+    </ItemGroup>
+
 </Project>

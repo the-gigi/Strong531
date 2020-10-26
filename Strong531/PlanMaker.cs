@@ -16,7 +16,10 @@ namespace Strong531
             var trainingMax = new RepMax();
             foreach (Lift lift in Enum.GetValues(typeof(Lift)))
             {
-                trainingMax[lift] = oneRepMax[lift] * 0.9m;
+                if (oneRepMax.ContainsKey(lift))
+                {
+                    trainingMax[lift] = oneRepMax[lift] * 0.9m;    
+                }
             }
 
             return trainingMax;
@@ -43,6 +46,10 @@ namespace Strong531
             var lowerBodyLifts = new HashSet<Lift>{Lift.Deadlift, Lift.Squat}; 
             foreach (Lift lift in Enum.GetValues(typeof(Lift)))
             {
+                if (!trainingMax.ContainsKey(lift))
+                {
+                    continue;
+                }
                 var increase = lowerBodyLifts.Contains(lift) ? 10 : 5;
                 trainingMax[lift] += increase;
             }
@@ -68,6 +75,10 @@ namespace Strong531
             var cycle = new Cycle(trainingMax);
             foreach (Lift lift in Enum.GetValues(typeof(Lift)))
             {
+                if (!trainingMax.ContainsKey(lift))
+                {
+                    continue;
+                }
                 var weight = trainingMax[lift];
                 var warmupSets = CalculateWarmupSets(weight);
                 foreach (Week week in Enum.GetValues(typeof(Week)))
@@ -80,17 +91,43 @@ namespace Strong531
             return cycle;            
         }
 
+        private static int roundToNearestFive(decimal number)
+        {
+            return (int)(number + 2.5m) / 5 * 5;
+        }
+        
+        /// <summary>
+        /// Calculate warmup sets at 40%, 50% and 60% of training max
+        ///
+        /// The numbers are rounded to the nearest to 5 pound boundary 
+        /// </summary>
+        /// <param name="trainingMax"></param>
+        /// <returns>Array of 3 warmup sets</returns>
         public static Set[] CalculateWarmupSets(decimal trainingMax)
         {
             var res = new Set[3];
             for (var i = 0; i < 3; ++i)
             {
                 res[i].Reps = i < 2 ? 5 : 3;
-                res[i].Weight = (0.4m + i * 0.1m) * trainingMax;
+                res[i].Weight = roundToNearestFive((0.4m + i * 0.1m) * trainingMax);
             }
             return res;
         }
 
+        /// <summary>
+        /// Calculate work sets according to Wendler's formula
+        ///
+        /// In week one all sets are 5 reps at 65%, 70% and 75%
+        /// In week two all sets are 3 reps at 75%, 80% and 85%
+        /// In week three the sets are 5, 3, 1 at 85%, 90% and 95%
+        ///
+        /// The percentages are off the training max
+        /// 
+        /// The numbers are rounded down to 5 pound boundary 
+        /// </summary>
+        /// <param name="trainingMax"></param>
+        /// <param name="week"></param>
+        /// <returns></returns>
         public static Set[] CalculateWorkSets(decimal trainingMax, Week week)
         {
             if (week == Week.Deload)
@@ -102,7 +139,7 @@ namespace Strong531
             for (var i = 0; i < 3; ++i)
             {
                 res[i].Reps = week == Week.OfOne ? 5 - i * 2 : 5 - (int)week * 2;                
-                res[i].Weight = (0.65m + 0.05m * (int)week + i * 0.1m) * trainingMax;
+                res[i].Weight = roundToNearestFive((0.65m + 0.05m * (int)week + i * 0.1m) * trainingMax);
             }
             return res;
         }
