@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "strong531"
+version = "0.1.0"
+description = ""
+authors = ["Gigi <the.gigi@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+gspread = "^3.6.0"
+sh = "^1.14.1"
+pathology = "^0.2"
+PyYAML = "^5.3.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
