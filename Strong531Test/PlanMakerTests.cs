@@ -11,6 +11,24 @@ namespace Strong531Test
         }
 
         [Test]
+        public void CalculateTrainintMax_Test()
+        {
+            var oneRepMax = new RepMax
+            {
+                {Lift.Press, 110},
+                {Lift.Deadlift, 200},
+                {Lift.Bench, 155},
+                {Lift.Squat, 165},
+            };
+
+            var trainingMax = PlanMaker.CalculateTrainingMax(oneRepMax);
+            Assert.AreEqual(0.9 * 110 , (double)trainingMax[Lift.Press], 0.1);
+            Assert.AreEqual(0.9 * 200, (double)trainingMax[Lift.Deadlift], 0.1);
+            Assert.AreEqual(0.9 * 155, (double)trainingMax[Lift.Bench], 0.1);
+            Assert.AreEqual(0.9 * 165, (double)trainingMax[Lift.Squat], 0.1);
+        }
+
+        [Test]
         public void CalculateWarmupSets_Test()
         {
             var warmupSets = PlanMaker.CalculateWarmupSets(100);

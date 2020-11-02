@@ -11,7 +11,7 @@ namespace Strong531
         /// </summary>
         /// <param name="oneRepMax">the true 1RM for all lifts</param>
         /// <returns></returns>
-        private static RepMax CalculateTrainingMax(RepMax oneRepMax)
+        public static RepMax CalculateTrainingMax(RepMax oneRepMax)
         {
             var trainingMax = new RepMax();
             foreach (Lift lift in Enum.GetValues(typeof(Lift)))
@@ -55,14 +55,19 @@ namespace Strong531
             }
         }
         
-        
+        /// <summary>
+        /// Makes a plan
+        /// </summary>
+        /// <param name="trueOneRepMax">the true 1RM max</param>
+        /// <param name="cycleCount">how many cycles to plan</param>
+        /// <returns>Plan</returns>
         public static Plan MakePlan(RepMax trueOneRepMax, int cycleCount)
         {
             var plan = new Plan(trueOneRepMax, cycleCount);
             var trainingMax = CalculateTrainingMax(trueOneRepMax); 
             for (var i = 0; i < cycleCount; ++i)
             {
-                var cycle = MakeCycle(trainingMax);
+                var cycle = MakeCycle(new RepMax(trainingMax));
                 plan.Cycles.Add(cycle);
                 UpdateTrainingMax(ref trainingMax);
             }

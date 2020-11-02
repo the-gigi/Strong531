@@ -38,10 +38,20 @@ namespace Strong531
 
     public class RepMax : Dictionary<Lift, decimal>
     {
+        public RepMax()
+        {
+        }
 
+        public RepMax(RepMax rm)
+        {
+            foreach (KeyValuePair<Lift, decimal> entry in rm)
+            {
+                Add(entry.Key, entry.Value);
+            }
+        }
     }
 
-
+    
     public struct Cycle
     {
         public Cycle(RepMax trainingMax)
