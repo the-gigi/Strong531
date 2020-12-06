@@ -1,4 +1,6 @@
 import os
+import sys
+
 import time
 from collections import namedtuple
 from enum import Enum
@@ -128,16 +130,16 @@ class GoogleSheetManager:
 
 
 class Strong531:
-    def __init__(self):
-        self.plan = self.generate_plan()
+    def __init__(self, cycles):
+        self.plan = self.generate_plan(cycles)
         self.gsm = GoogleSheetManager(strong531_key, 'Template')
 
     @staticmethod
-    def generate_plan():
+    def generate_plan(cycles):
         if not os.path.isfile(strong531_planner):
             raise RuntimeError('Missing planner. Build the Strong531ConsoleApp in Release mode')
 
-        plan = sh.dotnet(strong531_planner).stdout.decode('utf-8')
+        plan = sh.dotnet(strong531_planner, cycles).stdout.decode('utf-8')
         return yaml.safe_load(plan)
 
     def dump_plan(self):
@@ -178,7 +180,7 @@ class Strong531:
         return row
 
     def populate(self):
-        cycle_count = len(list(self.plan.values())[0])
+        cycle_count = len(list(self.plan.values())[0]['Cycles'])
         last_cycle = self.get_last_cycle()
         titles = [f'Cycle {last_cycle + 1 + i}' for i in range(cycle_count)]
         for title in titles:
@@ -206,7 +208,8 @@ class Strong531:
 
 def main():
     """ """
-    s = Strong531()
+    cycles = sys.argv[1] if len(sys.argv) > 1 else '2'
+    s = Strong531(cycles)
     s.dump_plan()
     s.populate()
 
